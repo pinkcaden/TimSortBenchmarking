@@ -43,7 +43,7 @@ class RandomizedIterator:
 
     def __iter__(self):
         if self._passes_requested is None:
-            raise RuntimeError("Randomization not set.")
+            raise RuntimeError("Randomization not set. Must set before each iteration.")
         self._next = 0
         self._iter_order = self._shaker_sort()
         return self
@@ -54,6 +54,8 @@ class RandomizedIterator:
             self._next += 1
             return ret
         else:
+            self._passes_requested = None
+            self._iter_order = None
             raise StopIteration
 
     def set_randomization(self, percentage: int) -> None:
@@ -74,13 +76,11 @@ class RandomizedIterator:
                 if copy[i]["val"] > copy[i + 1]["val"]:
                     copy[i], copy[i + 1] = copy[i + 1], copy[i]
                     swapped = True
-
             if not swapped:
                 break
             swapped = False
             passes -= 1
             end = end - 1
-
             for i in range(end - 1, start - 1, -1):
                 if copy[i]["val"] > copy[i + 1]["val"]:
                     copy[i], copy[i + 1] = copy[i + 1], copy[i]
