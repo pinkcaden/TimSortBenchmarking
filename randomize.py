@@ -1,12 +1,96 @@
+import numpy as np
 
+## Randomized Iterator Factory encapsulates RandomizedIterator
 
-class RandomizedArray:
-    def __init__(self, array):
-        pass
+## Randomized Iterator Class
+## Contains original list and uniform distribution random floating point array.
+## Iteration can be started with a randomness "percentage"
 
+## Chosen sorting algorithm: Cocktail Shaker Sort. Shaker sort is stable, performs in-place
+## swaps, and operates on the entire array in every pass.
 
-class RandomizedArrayFactory:
+class RandomizedIterator:
+    def __init__(self, array: list):
+        self._passes_requested = None
+        self._iter_order = None
+        self._array = array
+        random_list = np.random.uniform(size=len(array)).tolist()
+        self._random_order = []
+        for index in range(len(random_list)):
+            self._random_order.append({"val": random_list[index], "index": index})
+
+        self._required_passes = 0
+        swapped = True
+        start = 0
+        end = len(array) - 1
+        while swapped:
+            swapped = False
+            for i in range(start, end):
+                if random_list[i] > random_list[i + 1]:
+                    random_list[i], random_list[i + 1] = random_list[i + 1], random_list[i]
+                    swapped = True
+
+            if not swapped:
+                break
+            self._required_passes += 1
+            swapped = False
+            end = end - 1
+            for i in range(end - 1, start - 1, -1):
+                if random_list[i] > random_list[i + 1]:
+                    random_list[i], random_list[i + 1] = random_list[i + 1], random_list[i]
+                    swapped = True
+            start = start + 1
+
+    def __iter__(self):
+        if self._passes_requested is None:
+            raise RuntimeError("Randomization not set.")
+        self._next = 0
+        self._iter_order = self._shaker_sort()
+        return self
+
+    def __next__(self):
+        if self._next < len(self._array):
+            ret = self._array[self._iter_order[self._next]["index"]]
+            self._next += 1
+            return ret
+        else:
+            raise StopIteration
+
+    def set_randomization(self, percentage: int) -> None:
+        if percentage < 0 or percentage > 100:
+            raise ValueError("Percentage must be between 0 and 100")
+        self._passes_requested = int((percentage / 100 ) * self._required_passes)
+
+    def _shaker_sort(self):
+        copy = self._random_order[:]
+        swapped = True
+        start = 0
+        end = len(copy) - 1
+        passes = self._passes_requested
+
+        while swapped and passes > 0:
+            swapped = False
+            for i in range(start, end):
+                if copy[i]["val"] > copy[i + 1]["val"]:
+                    copy[i], copy[i + 1] = copy[i + 1], copy[i]
+                    swapped = True
+
+            if not swapped:
+                break
+            swapped = False
+            passes -= 1
+            end = end - 1
+
+            for i in range(end - 1, start - 1, -1):
+                if copy[i]["val"] > copy[i + 1]["val"]:
+                    copy[i], copy[i + 1] = copy[i + 1], copy[i]
+                    swapped = True
+            start = start + 1
+        return copy
+
+class RandomizedIteratorFactory:
     def __init__(self):
         pass
-    def get_randomized_array(self, array):
-        return RandomizedArray(array)
+
+    def get_randomized_iterator(self, array):
+        return RandomizedIterator(array)
