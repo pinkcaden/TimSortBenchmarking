@@ -91,6 +91,8 @@ class RandomizedIterator:
 class RandomizedIteratorFactory:
     def __init__(self):
         pass
-
-    def get_randomized_iterator(self, array):
+    @staticmethod
+    def get_randomized_iterator(array):
+        if len(array) == 0 or array is None:
+            raise RuntimeError("Array is empty or None")
         return RandomizedIterator(array)
