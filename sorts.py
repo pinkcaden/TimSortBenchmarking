@@ -1,46 +1,69 @@
-
 from randomize import RandomizedIteratorFactory
 import numpy as np
 
 
+class Record:
+    def __init__(self):
+        self._operation_counts = {
+            "<" : 0,
+            ">" : 0,
+            ">=" : 0,
+            "<=" : 0,
+            "==" : 0
+        }
+    def scratch(self, string: str):
+        self._operation_counts[string] += 1
+    def get_counts(self):
+        return self._operation_counts
+
 
 class Term(float):
     _value = None
-    def __init__(self, value):
-        _value = value
-    def __eq__(self, other):
-        self.__scratch_record("==")
-    def __lt__(self, other):
-        self.__scratch_record("<")
-    def __gt__(self, other):
-        self.__scratch_record(">")
-    def __le__(self, other):
-        self.__scratch_record("<=")
-    def __ge__(self, other):
-        self.__scratch_record(">")
+
+    def __init__(self, value, record):
+        self._value = value
+        self._record = record
+
+    def __new__(cls, value, record):
+        return super().__new__(cls, value)
+
+    def __eq__(self, other) -> bool:
+        self._record.scratch("==")
+        return float.__eq__(self, other)
+
+    def __lt__(self, other) -> bool:
+        self._record.scratch("<")
+        return float.__lt__(self, other)
+
+    def __gt__(self, other) -> bool:
+        self._record.scratch(">")
+        return float.__gt__(self, other)
+
+    def __le__(self, other) -> bool:
+        self._record.scratch("<=")
+        return float.__le__(self, other)
+
+    def __ge__(self, other) -> bool:
+        self._record.scratch(">")
+        return float.__ge__(self, other)
 
 
-    def __scratch_record(self, sout):
-        print(sout)
+arrayR = np.random.uniform(size=1000)
+arrayS = []
+for i in range(1000):
+    arrayS.append(i)
 
+randomize = RandomizedIteratorFactory.get_randomized_iterator(arrayS)
 
-class SortBehaviorFactory:
+for n in range(20):
+    randomize.set_randomization(5*n)
 
-    def __init__(self):
-        pass
+    terms = []
+    myRecord = Record()
+    for rand in randomize:
+        terms.append(Term(rand, myRecord))
 
+    print(terms)
+    print(sorted(terms))
 
-array = np.random.uniform(size = 100)
-randomize = RandomizedIteratorFactory.get_randomized_iterator(array)
-
-
-
-randomize.set_randomization(100)
-
-terms = []
-for n in randomize:
-    terms.append(Term(n))
-
-print(terms)
-
-print(terms[0] > 5 or terms[1] == 4)
+    print(myRecord.get_counts())
