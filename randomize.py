@@ -18,7 +18,6 @@ class RandomizedIterator:
         self._random_order = []
         for index in range(len(random_list)):
             self._random_order.append({"val": random_list[index], "index": index})
-
         self._required_passes = 0
         swapped = True
         start = 0
@@ -96,3 +95,96 @@ class RandomizedIteratorFactory:
         if len(array) == 0 or array is None:
             raise RuntimeError("Array is empty or None")
         return RandomizedIterator(array)
+
+sout1 = []
+sout2 = []
+sout3 = []
+sout4 = []
+ob = RandomizedIteratorFactory.get_randomized_iterator([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,
+                                                        17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+                                                        27, 28, 29, 30, 31, 32, 33 ,34, 35, 36, 37, 38,
+                                                        39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+                                                        51, 52, 53, 54, 55, 56, 57, 58, 59, 60])
+print("______________________________________________________________________________________________")
+ob.set_randomization(0)
+for n in ob:
+    sout1.append(n)
+
+ob.set_randomization(30)
+for n in ob:
+    sout2.append(n)
+
+ob.set_randomization(60)
+for n in ob:
+    sout3.append(n)
+
+ob.set_randomization(100)
+for n in ob:
+    sout4.append(n)
+
+print("0%: " + str(sout1))
+print("30%: " + str(sout2))
+print("60%: " + str(sout3))
+print("100%: " + str(sout4))
+
+sout1 = []
+sout2 = []
+sout3 = []
+sout4 = []
+ob = RandomizedIteratorFactory.get_randomized_iterator([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                                        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1,  ])
+print("______________________________________________________________________________________________")
+ob.set_randomization(0)
+for n in ob:
+    sout1.append(n)
+
+ob.set_randomization(30)
+for n in ob:
+    sout2.append(n)
+
+ob.set_randomization(60)
+for n in ob:
+    sout3.append(n)
+
+ob.set_randomization(30)
+for n in ob:
+    sout4.append(n)
+
+print("0%: " + str(sout1))
+print("30%: " + str(sout2))
+print("60%: " + str(sout3))
+print("100%: " + str(sout4))
+
+sout1 = []
+sout2 = []
+sout3 = []
+sout4 = []
+ob = RandomizedIteratorFactory.get_randomized_iterator([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                                        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                                        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                                                        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
+print("______________________________________________________________________________________________")
+ob.set_randomization(0)
+for n in ob:
+    sout1.append(n)
+
+ob.set_randomization(30)
+for n in ob:
+    sout2.append(n)
+
+ob.set_randomization(60)
+for n in ob:
+    sout3.append(n)
+
+ob.set_randomization(100)
+for n in ob:
+    sout4.append(n)
+
+print("0%: " + str(sout1))
+print("30%: " + str(sout2))
+print("60%: " + str(sout3))
+print("100%: " + str(sout4))
