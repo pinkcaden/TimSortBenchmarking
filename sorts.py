@@ -46,24 +46,3 @@ class Term(float):
     def __ge__(self, other) -> bool:
         self._record.scratch(">")
         return float.__ge__(self, other)
-
-
-arrayR = np.random.uniform(size=1000)
-arrayS = []
-for i in range(1000):
-    arrayS.append(i)
-
-randomize = RandomizedIteratorFactory.get_randomized_iterator("cocktail",arrayS)
-
-for n in range(20):
-    randomize.set_randomization(5*n)
-
-    terms = []
-    myRecord = Record()
-    for rand in randomize:
-        terms.append(Term(rand, myRecord))
-    #
-    # print(terms)
-    sorted(terms)
-
-    print(str(5*n)+"% Random: "+ str(myRecord.get_counts()))
