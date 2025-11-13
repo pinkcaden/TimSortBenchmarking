@@ -1,7 +1,6 @@
 from randomize import RandomizedIteratorFactory
 import numpy as np
 
-
 class Record:
     def __init__(self):
         self._operation_counts = {
@@ -39,6 +38,7 @@ class Term(float):
         self._record.scratch(">")
         return float.__gt__(self, other)
 
+
     def __le__(self, other) -> bool:
         self._record.scratch("<=")
         return float.__le__(self, other)
@@ -53,7 +53,7 @@ arrayS = []
 for i in range(1000):
     arrayS.append(i)
 
-randomize = RandomizedIteratorFactory.get_randomized_iterator(arrayS)
+randomize = RandomizedIteratorFactory.get_randomized_iterator("cocktail",arrayS)
 
 for n in range(20):
     randomize.set_randomization(5*n)
@@ -62,8 +62,8 @@ for n in range(20):
     myRecord = Record()
     for rand in randomize:
         terms.append(Term(rand, myRecord))
+    #
+    # print(terms)
+    sorted(terms)
 
-    print(terms)
-    print(sorted(terms))
-
-    print(myRecord.get_counts())
+    print(str(5*n)+"% Random: "+ str(myRecord.get_counts()))
