@@ -16,7 +16,7 @@ class VideoDataGenerator:
                 has_next, frame = capture.read()
                 if not has_next: break
                 i_list.append(float(np.mean(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))))
-            ret.append(i_list)
+            if i_list: ret.append(i_list)
         capture.release()
         return ret
 
