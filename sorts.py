@@ -17,7 +17,6 @@ class Record:
 
 
 class Term(float):
-    _value = None
 
     def __init__(self, value, record):
         self._value = value
@@ -46,3 +45,23 @@ class Term(float):
     def __ge__(self, other) -> bool:
         self._record.scratch(">")
         return float.__ge__(self, other)
+
+terms = []
+rec = Record()
+for n in [15,3,2,191,17]:
+    terms.append(Term(n, rec))
+
+for n in terms:
+    sorted(terms[:])
+
+newArr = []
+for n in terms:
+    newArr.append(n)
+
+leftArr = newArr
+leftAr = newArr
+
+
+sorted(leftArr)
+
+print(rec.get_counts())
