@@ -46,22 +46,3 @@ class Term(float):
         self._record.scratch(">")
         return float.__ge__(self, other)
 
-terms = []
-rec = Record()
-for n in [15,3,2,191,17]:
-    terms.append(Term(n, rec))
-
-for n in terms:
-    sorted(terms[:])
-
-newArr = []
-for n in terms:
-    newArr.append(n)
-
-leftArr = newArr
-leftAr = newArr
-
-
-sorted(leftArr)
-
-print(rec.get_counts())

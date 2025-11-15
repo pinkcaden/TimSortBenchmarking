@@ -9,7 +9,12 @@ import numpy as np
 ## Chosen sorting algorithm: Cocktail Shaker Sort. Shaker sort is stable, performs in-place
 ## swaps, and operates on the entire array in every pass.
 
-class RandomizedIterator:
+class FisherYatesRandomizedIterator:
+    def __init__(self, array : list):
+        pass
+
+
+class CocktailRandomizedIterator:
     def __init__(self, array: list):
         self._passes_requested = None
         self._iter_order = None
@@ -95,7 +100,10 @@ class RandomizedIteratorFactory:
         if len(array) == 0 or array is None:
             raise RuntimeError("Array is empty or None")
         if method == "cocktail":
-            return RandomizedIterator(array)
+            return CocktailRandomizedIterator(array)
+        if method == "fisher-yates":
+            return FisherYatesRandomizedIterator(array)
+        return None
 
 
 
