@@ -2,9 +2,7 @@ import cv2
 import numpy as np
 
 class VideoDataGenerator:
-    def __init__(self, video_path):
-        self._video_path = video_path
-
+    @staticmethod
     def get_frames_brightnesses(self, list_count, list_size):
         capture = cv2.VideoCapture(self._video_path)
         ret = []
@@ -14,7 +12,9 @@ class VideoDataGenerator:
             i_list = []
             for j in range(list_size):
                 has_next, frame = capture.read()
-                if not has_next: break
+                if not has_next:
+                    no_frames = True
+                    break
                 i_list.append(float(np.mean(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))))
             if i_list: ret.append(i_list)
         capture.release()
@@ -22,3 +22,6 @@ class VideoDataGenerator:
 
 
 
+class ArrayMetrics:
+    def __init__(self, array):
+        self._array = array
