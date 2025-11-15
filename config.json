@@ -1,10 +1,12 @@
 {
   "data" : {
     "video-data" : [
-      "gilbert_in_chair.mp4"
+      "black_white_orbs.mp4",
+      "man_on_hill.mp4",
+      "turtle_to_ocean.mp4"
     ],
     "arrayCount" : 10,
-    "arraySize" : 10
+    "arraySize" : 100
   },
   "diagnostics" : {
 
@@ -13,6 +15,8 @@
 
   },
   "sorts" : {
+    "sorts" :
+      ["timsort"]
 
   },
   "upload" : {
