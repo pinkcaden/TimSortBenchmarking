@@ -3,8 +3,8 @@ import numpy as np
 
 class VideoDataGenerator:
     @staticmethod
-    def get_frames_brightnesses(self, list_count, list_size):
-        capture = cv2.VideoCapture(self._video_path)
+    def get_frames_brightnesses(path, list_count, list_size):
+        capture = cv2.VideoCapture(path)
         ret = []
         no_frames = False
         for i in range(list_count):

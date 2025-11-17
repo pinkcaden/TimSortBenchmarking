@@ -1,25 +1,48 @@
 {
-  "data" : {
-    "video-files" : [
+  "input" : {
+    "video_directory" : "./video-files",
+    "video-files": [
       "black_white_orbs.mp4",
       "man_on_hill.mp4",
       "turtle_to_ocean.mp4"
     ],
-    "arrayCount" : 10,
-    "arraySize" : 100
+    "sampling" : {
+      "arrayCount": 10,
+      "arraySize": 100
+    }
   },
-  "diagnostics" : {
+  "validation" : {
+    "min_variance" : null,
+    "max_variance" : null,
+    "min_std_dev"  : null,
+    "max_std_dev" : null
+
+  },
+  "cleaning" : {
+
+
 
   },
   "randomize" : {
 
-  },
-  "sorts" : {
-    "sorts" :
-      ["timsort"]
+
 
   },
-  "upload" : {
+  "sorting" : {
+    "sorts" :
+      ["timsort"]
+  },
+  "diagnostics" : {
+
+
+
+  },
+  "container" : {
+
+
+
+  },
+  "storage" : {
 
   }
 
