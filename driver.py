@@ -3,8 +3,14 @@ from data import VideoDataGenerator
 config_data = json.load(open("config.json"))
 print(config_data)
 
-data = {}
-for video in config_data["data"]["video-data"]:
-    print(video)
-    data[video] = VideoDataGenerator("video-data/"+video)
-    print(data[video].get_frames_brightnesses(config_data["data"]["arrayCount"], config_data["data"]["arraySize"]))
+produced_arrays = [[]]
+
+for video in config_data["input"]["video-files"]:
+
+        matrix = VideoDataGenerator.get_frames_brightnesses("video-files/"+video,
+        config_data["input"]["sampling"]["arrayCount"],
+        config_data["input"]["sampling"]["arraySize"])
+        for n in matrix:
+            produced_arrays.append(n)
+
+print(produced_arrays)
