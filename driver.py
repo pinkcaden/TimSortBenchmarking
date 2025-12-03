@@ -15,10 +15,11 @@ from data import VideoDataGenerator
 #
 # print(produced_arrays)
 
-vdg = VideoDataGenerator("video-files/black_white_orbs.mp4", 9000)
+vdg = VideoDataGenerator("video-files/boxing.mp4", 400)
 
-vdg.set_capture_settings(50, [2], ["brightness"])
+vdg.set_capture_settings(100, [1,2,4,6, 8], ["brightness_deviation"])
 
 
 for n in vdg:
-    print(n)
+    for val in n:
+        print(val)
