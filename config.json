@@ -1,49 +1,9 @@
 {
-  "input" : {
-    "video_directory" : "./video-files",
     "video-files": [
       "black_white_orbs.mp4",
       "man_on_hill.mp4",
       "turtle_to_ocean.mp4"
     ],
-    "sampling" : {
-      "arrayCount": 10,
-      "arraySize": 100
-    }
-  },
-  "validation" : {
-    "min_variance" : null,
-    "max_variance" : null,
-    "min_std_dev"  : null,
-    "max_std_dev" : null
-
-  },
-  "cleaning" : {
-
-
-
-  },
-  "randomize" : {
-
-
-
-  },
-  "sorting" : {
-    "sorts" :
-      ["timsort"]
-  },
-  "diagnostics" : {
-
-
-
-  },
-  "container" : {
-
-
-
-  },
-  "storage" : {
-
-  }
+    "video_data_types" :
 
 }
