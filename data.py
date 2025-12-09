@@ -7,19 +7,34 @@ class FrameData:
     @staticmethod
     def get_frame_data(frame, data_types: list[str]):
         ret = {}
-        r, g, b = cv2.split(frame)
+        r_raw, g_raw, b_raw = cv2.split(frame)
+
+        r = r_raw[::10, ::10]
+        b = b_raw[::10, ::10]
+        g = g_raw[::10, ::10]
+
+
+        rg_diff = np.abs(r.astype(int) - g.astype(int))
+        rb_diff = np.abs(r.astype(int) - b.astype(int))
+        gb_diff = np.abs(g.astype(int) - b.astype(int))
+
+        threshold = 30
+        colorful_mask = (rg_diff > threshold) | (rb_diff > threshold) | (gb_diff > threshold)
+
         for data_type in data_types:
             match data_type:
-                case "brightness":
-                    ret["brightness"] = (float(np.mean(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))))
-                case "brightness_deviation":
-                    ret["brightness_deviation"] = (float(np.std(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))))
                 case "red":
-                    ret["red"] = (float(np.mean(r)))
+                    r_val = r[colorful_mask]
+                    if len(r_val) > 0:
+                        ret["red"] = np.mean(r[colorful_mask])
                 case "green":
-                    ret["green"] = (float(np.mean(g)))
+                    g_val = g[colorful_mask]
+                    if len(g_val) > 0:
+                        ret["green"] = np.mean(g[colorful_mask])
                 case "blue":
-                    ret["blue"] = (float(np.mean(b)))
+                    b_val = b[colorful_mask]
+                    if len(b_val) > 0:
+                        ret["blue"] = np.mean(b[colorful_mask])
                 case _:
                     raise RuntimeError("Possible Data types are: ")
         return ret
@@ -51,12 +66,12 @@ class VideoDataGenerator:
                 self._buffer[data_type][skip_value] = []
         return self
 
+
     def __next__(self):
         if not self._has_next: raise StopIteration
         chunk = []
         chunk_size = 0
         while chunk_size < self._chunk_size_max:
-
 
             self._has_next, frame = self._capture.read()
             if not self._has_next:
@@ -85,4 +100,7 @@ class VideoDataGenerator:
         self._data_types = data_types
         self._settings_complete = True
         self._skip_values = skip_values
+
+    def get_file_name(self):
+        return self._video_path
 
