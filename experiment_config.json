@@ -1,0 +1,95 @@
+{
+  "environmentCaptureData": {
+    "cpu": true
+  },
+  "videoData": {
+    "videoFiles": [
+      "candy_shake.MTS",
+      "candy_throw_hand.MTS",
+      "candy_throw_tight.MTS",
+      "candy_throw_wide.MTS",
+      "clay_squish.MTS",
+      "paint_mix.MTS",
+      "paint_balloon.MTS"
+    ],
+    "frameDataElements": [
+      "red",
+      "green",
+      "blue"
+    ],
+    "frameSkips": [
+      1,
+      2,
+      4,
+      16,
+      24,
+      32
+    ],
+    "arraySizes": [100, 500, 1000],
+    "chunkTermCount" : 9000
+  },
+  "arrayAnalysis": {
+    "multiplexer": {
+    },
+    "arrayMetrics": {
+      "size": true,
+      "mean": true,
+      "median": true,
+      "std": true,
+      "range": true,
+      "max": true,
+      "min": true,
+      "inversions": true,
+      "kendallTau": true,
+      "descRuns": false,
+      "ascRuns": false
+    },
+    "array-parameters": {
+      "size": {
+        "min": null,
+        "max": null,
+        "margin": null
+      },
+      "mean": {
+        "min": null,
+        "max": null,
+        "margin": null
+      },
+      "median": {
+        "min": null,
+        "max": null,
+        "margin": null
+      },
+      "std": {
+        "min": null,
+        "max": null,
+        "margin": null
+      },
+      "range": {
+        "min": null,
+        "max": null,
+        "margin": null
+      },
+      "max": {
+        "min": null,
+        "max": null,
+        "margin": null
+      },
+      "min": {
+        "min": null,
+        "max": null,
+        "margin": null
+      }
+    }
+  },
+  "sortingAnalysis": {
+    "sorts" : ["timsort"],
+    "instructions": true
+  },
+  "multiplexer" : {},
+  "storage": {
+    "experimentDirectory": "experiments",
+    "experimentDBName": "experiments.json"
+  }
+
+}
